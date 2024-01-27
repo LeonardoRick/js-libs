@@ -4,7 +4,7 @@ Javascript functions that are useful to be re-used
 
 # usage
 
-    `npm i @leonardorick/utils`
+    `pnpm i @leonardorick/utils`
 
 #### on plain javascript
 
@@ -16,7 +16,7 @@ Javascript functions that are useful to be re-used
 
 ### publish
 
-    `npm run build`
+    `pnpm run build`
 
 #### add new functions
 
