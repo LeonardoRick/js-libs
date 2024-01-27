@@ -8,15 +8,19 @@ Javascript functions that are useful to be re-used
 
 #### on plain javascript
 
-    `import utils from './node_modules/@leonardorick/utils/index.js';`
+    import utils from './node_modules/@leonardorick/utils/index.js';
 
 #### on a modern JS application working with bundlers
 
-    `import utils from '@leoanrdorick/utils';`
+    import utils from '@leoanrdorick/utils';
 
 ### publish
 
-    `pnpm run build`
+    pnpm vresion patch
+    pnpm run build
+    git commit -m "<message>"
+    git push
+    npm publish --access=public
 
 #### add new functions
 
