@@ -41,7 +41,7 @@ Optional parameters: Usually optional parameters are the last param of the funct
 ```javascript
 funciton something(a, {
   opt1 = true,
-  opt2 = undefined,
+  opt2 = null,
   opt3 = 5,
 } = {})
 ```

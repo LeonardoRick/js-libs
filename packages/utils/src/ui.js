@@ -30,7 +30,7 @@ import { hypotenuse, round } from './math.js';
  */
 export function getCursorCenterDistance({
   addListener = true,
-  box = undefined,
+  box = null,
   normalizedDistanceDecimals = 5,
 } = {}) {
   const container = box || document.querySelector('html');
@@ -72,7 +72,7 @@ export function getCursorCenterDistance({
  * removeListeners: () => void,
  * }}
  */
-export function moveTagToCursorPosition(tag, { box = undefined, addListener = true } = {}) {
+export function moveTagToCursorPosition(tag, { box = null, addListener = true } = {}) {
   // we need to remove pointer events from the tag so
   // mousemove can be triggered  behing the tag
   tag.style.pointerEvents = 'none';
