@@ -151,7 +151,7 @@ export function applyOrbitControl(camera, canvas, renderer, scene, animationCall
   //if controls.enableDamping or controls.autoRotate are set to true
   loopAnimation(renderer, scene, camera, () => {
     controls.update();
-    animationCallback();
+    animationCallback({ renderer, scene, camera });
   });
   return controls;
 }
@@ -167,7 +167,7 @@ export function applyOrbitControl(camera, canvas, renderer, scene, animationCall
  */
 export function loopAnimation(renderer, scene, camera, callback = () => {}) {
   const animate = () => {
-    callback();
+    callback({ renderer, scene, camera });
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
   };
@@ -176,18 +176,34 @@ export function loopAnimation(renderer, scene, camera, callback = () => {}) {
 
 /**
  *
- * @param {string} canvasId
+ * @param {I.IminimalSetupOptions} options
+ * @returns {I.IminimalSetupReturnType}
  */
 
-export function minimalSetup({ canvasId = 'webgl', mesh = null, applyOrbitControl = true } = {}) {
+export function minimalSetup({
+  canvasId = 'webgl',
+  mesh = null,
+  enableOrbitControl = true,
+  // keep animationCallback as undefined so applyOrbitControl
+  // can override it with an empty function when nothing passed
+  animationCallback = undefined,
+} = {}) {
+  let controls;
   const { renderer, scene, canvas } = getRendererSceneCanvas(canvasId);
   const camera = setupDefaultCameraAndScene(scene, renderer);
-  if (applyOrbitControl) {
-    applyOrbitControl(camera, canvas, renderer, scene);
+
+  // if orbit control is enabled, apply orbit control and animation callback.
+  // if not, check if we have an animationCallback to apply it alone
+  if (enableOrbitControl) {
+    controls = applyOrbitControl(camera, canvas, renderer, scene, animationCallback);
+  } else if (animationCallback) {
+    loopAnimation(renderer, scene, camera, animationCallback);
   }
+
   const m = mesh || new Mesh(new BoxGeometry(1, 1, 1));
-  m.material.color.setHex(0xff0000);
+  m.material.color?.setHex(0xff0000);
   scene.add(m);
+
   renderer.render(scene, camera);
   return {
     renderer,
@@ -195,5 +211,6 @@ export function minimalSetup({ canvasId = 'webgl', mesh = null, applyOrbitContro
     canvas,
     camera,
     mesh,
+    controls,
   };
 }

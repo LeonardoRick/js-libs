@@ -26,3 +26,21 @@ import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
  * @property {number} near
  * @property {number} far
  */
+
+/**
+ * @typedef {Object} IminimalSetupOptions
+ * @property {string} canvasId
+ * @property {Mesh} mesh
+ * @property {boolean} enableOrbitControl
+ * @property {Function} animationCallback
+ */
+
+/**
+ * @typedef {Object} IminimalSetupReturnType
+ * @property {WebGLRenderer} renderer
+ * @property {Scene} scene
+ * @property {HTMLCanvasElement} canvas
+ * @property {Camera} camera
+ * @property {Mesh} mesh
+ * @property {OrbitControls} controls
+ */
