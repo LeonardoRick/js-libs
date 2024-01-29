@@ -1,6 +1,6 @@
-import { createDefault, isPlainObject } from '../src/general';
+import { createDefault, isDefinedAndNotEmpty, isPlainObject } from '../src/general';
 
-describe('createDefault', () => {
+describe('createDefault :::', () => {
   it('should behave properly as an object and allow asignments on undefined properties', () => {
     const dict = createDefault();
     dict.value1.value2.value3 = 10;
@@ -50,7 +50,33 @@ describe('createDefault', () => {
   });
 });
 
-describe('isPlainObject', () => {
+describe('isDefinedAndNotEmpty :::', () => {
+  it('expect a primary value to return true', () => {
+    expect(isDefinedAndNotEmpty(10)).toEqual(true);
+    expect(isDefinedAndNotEmpty('10')).toEqual(true);
+    expect(isDefinedAndNotEmpty(true)).toEqual(true);
+    expect(isDefinedAndNotEmpty(false)).toEqual(true);
+  });
+
+  it('expect a array or object to return true', () => {
+    expect(isDefinedAndNotEmpty([1, 2, 3])).toEqual(true);
+    expect(isDefinedAndNotEmpty({ a: 1, b: 2 })).toEqual(true);
+  });
+
+  it('expect a falsy value, except "false" and "0" to return false', () => {
+    expect(isDefinedAndNotEmpty(0)).toEqual(true);
+    expect(isDefinedAndNotEmpty(false)).toEqual(true);
+    expect(isDefinedAndNotEmpty(null)).toEqual(false);
+    expect(isDefinedAndNotEmpty(undefined)).toEqual(false);
+  });
+
+  it('expect an empty object or empty array to return false', () => {
+    expect(isDefinedAndNotEmpty([])).toEqual(false);
+    expect(isDefinedAndNotEmpty({})).toEqual(false);
+  });
+});
+
+describe('isPlainObject :::', () => {
   it('should return true for plain objects', () => {
     expect(isPlainObject({})).toEqual(true);
     expect(isPlainObject(new Object())).toEqual(true);

@@ -28,6 +28,17 @@ export function createDefault(target = {}) {
 }
 
 /**
+ * Check if a value sent is defined and is not [] nor {}
+ * @param {any} value
+ */
+export function isDefinedAndNotEmpty(value) {
+  return (
+    (value || value === false || value === 0) &&
+    (typeof value === 'object' ? Object.keys(value).length > 0 : true)
+  );
+}
+
+/**
  * Check if an object is a POJO
  * @param {any} obj
  * @returns {boolean}
