@@ -120,16 +120,6 @@ export function updateRendererSizeRatio(renderer, width, height) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 }
 
-/**
- * used to format template literals on glsl and show a
- * formatted string by the extension glsl-literal
- * @param {string} x
- * @returns string with recognized glsl synax by the ide
- * example:
- * const vShader = glsl`...(shader WebGL code here)`
- */
-export const glsl = (x) => x[0];
-
 /******************************************
  * ANIMATION
  ******************************************/

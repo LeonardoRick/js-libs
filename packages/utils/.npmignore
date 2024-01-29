@@ -1,6 +1,7 @@
-node_modules
-tests
-.prettierrc
-jest.config.js
+node_modules/
+tests/
 coverage/
 src/
+
+.prettierrc
+jest.config.js
