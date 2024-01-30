@@ -5,14 +5,14 @@ import {
   setupDefaultCameraAndScene,
   setResizeListener,
   updateRendererSizeRatio,
-  glsl,
   // general - ANIMATION
   applyOrbitControl,
   loopAnimation,
   minimalSetup,
 } from './general.js';
 
-import { loadCameraCoordinates, saveCameraCoordinates } from './cameras.js';
+import { loadCameraCoordinates, saveCameraCoordinates, setCameraCoordinates } from './cameras.js';
+import { glsl, replaceShaderImport } from './shaders.js';
 
 export {
   // general - ESSENTIALS
@@ -21,7 +21,6 @@ export {
   setupDefaultCameraAndScene,
   setResizeListener,
   updateRendererSizeRatio,
-  glsl,
   // general - ANIMATION
   applyOrbitControl,
   loopAnimation,
@@ -30,6 +29,11 @@ export {
   // cameras
   loadCameraCoordinates,
   saveCameraCoordinates,
+  setCameraCoordinates,
+
+  // shaders
+  glsl,
+  replaceShaderImport,
 };
 
 export default {
@@ -39,7 +43,6 @@ export default {
   setupDefaultCameraAndScene,
   setResizeListener,
   updateRendererSizeRatio,
-  glsl,
 
   // general - ANIMATION
   applyOrbitControl,
@@ -49,4 +52,9 @@ export default {
   // cameras
   loadCameraCoordinates,
   saveCameraCoordinates,
+  setCameraCoordinates,
+
+  // shaders
+  glsl,
+  replaceShaderImport,
 };

@@ -4,9 +4,11 @@ import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
  * @typedef {Object} IgetRendererSceneCanvasOptions
  * @property {number} width
  * @property {number} height
+ * @property {boolean} alpha
  * @property {boolean} allowFullScreen
  * @property {boolean} antialias
  * @property {string} powerPreference
+ * @property {boolean} applyCanvasStyle
  */
 
 /**
@@ -33,6 +35,7 @@ import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
  * @property {Mesh} mesh
  * @property {boolean} enableOrbitControl
  * @property {Function} animationCallback
+ * @property {boolean} alpha
  */
 
 /**

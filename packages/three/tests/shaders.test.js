@@ -18,8 +18,8 @@ describe('replaceShaderImport ::', () => {
             }
     `;
     const modules = { snoise };
-    const vertexShader = replaceShaderImport(vertex, { modules });
-    const fragmentShader = replaceShaderImport(fragment, { modules });
+    const vertexShader = replaceShaderImport(vertex, modules);
+    const fragmentShader = replaceShaderImport(fragment, modules);
     expect(vertexShader).toContain(snoise);
     expect(fragmentShader).not.toContain(snoise);
   });

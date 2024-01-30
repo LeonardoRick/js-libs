@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   three:
-    specifier: ^0.160.1
+    specifier: '>=0.160.1'
     version: 0.160.1
 
 devDependencies:

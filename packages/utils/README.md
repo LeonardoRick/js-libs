@@ -36,7 +36,7 @@ If you are going to add a new "module" (file) make sure to keep the same structu
 3. `types/`
    The signature of the exported classes/functions should be present on `types/` as a `.d.ts` file. This file should also be imported on the `types/index.d.ts` so all types of the exported package members can be properly infered by IDE's
 
-Try to make the functions inside each module ordered alphabetically when it's possible!
+Try to make the functions inside each module ordered alphabetically as much as possible!
 
 #### Code patterns
 

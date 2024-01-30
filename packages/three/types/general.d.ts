@@ -1,15 +1,15 @@
-import { Scene } from 'three';
-import { WebGLRenderer } from 'three';
-import { Camera } from 'three';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import type { Scene, Camera, WebGLRenderer } from 'three';
+import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export interface IgetRendererSceneCanvasOptions {
   width?: number;
   height?: number;
+  alpha?: number;
   allowFullScreen?: boolean;
   antialias?: boolean;
   powerPreference?: string;
+  applyCanvasStyle?: boolean;
 }
 
 export interface IgetRendererSceneCanvasReturnType {
@@ -33,6 +33,7 @@ export interface IminimalSetupOptions {
   mesh?: Mesh;
   enableOrbitControl?: boolean;
   animationCallback?: Function;
+  alpha?: boolean;
 }
 
 export interface IminimalSetupReturnType {
@@ -88,5 +89,3 @@ export function loopAnimation(
 ): void;
 
 export function minimalSetup(options?: IminimalSetupOptions): IminimalSetupReturnType;
-
-export function glsl(x: string): string;

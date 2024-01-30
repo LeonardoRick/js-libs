@@ -11,7 +11,7 @@
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "rm -rf ./dist && babel src -d dist",
-    "temp": "babel --version"
+    "deploy": "npm run build && npm version patch && npm publish"
   },
   "keywords": [
     "JS",

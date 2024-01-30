@@ -19,6 +19,12 @@ export function getRendererSceneCanvas(
     width = window.innerWidth,
     height = window.innerHeight,
     allowFullScreen = true,
+    applyCanvasStyle = true,
+    /**
+     * renderer options
+     */
+    // allow transparent background
+    alpha = true,
     // antialias affects performance but gives a better rendering
     antialias = false,
     // powerPreference options: 'high-performance' | 'low-power' | 'default'
@@ -26,15 +32,17 @@ export function getRendererSceneCanvas(
   } = {}
 ) {
   const canvas = document.getElementById(canvasId);
-  const renderer = new WebGLRenderer({ canvas, antialias, powerPreference });
+  const renderer = new WebGLRenderer({ canvas, antialias, powerPreference, alpha });
   const scene = new Scene();
   updateRendererSizeRatio(renderer, width, height);
   allowFullScreen && setFullScreenListener(canvas);
 
-  canvas.style.position = 'fixed';
-  canvas.style.top = 0;
-  canvas.style.left = 0;
-  canvas.style.outline = 'none';
+  if (applyCanvasStyle) {
+    canvas.style.position = 'fixed';
+    canvas.style.top = 0;
+    canvas.style.left = 0;
+    canvas.style.outline = 'none';
+  }
   return { renderer, scene, canvas };
 }
 
@@ -177,9 +185,11 @@ export function minimalSetup({
   // keep animationCallback as undefined so applyOrbitControl
   // can override it with an empty function when nothing passed
   animationCallback = undefined,
+
+  alpha = true,
 } = {}) {
   let controls;
-  const { renderer, scene, canvas } = getRendererSceneCanvas(canvasId);
+  const { renderer, scene, canvas } = getRendererSceneCanvas(canvasId, { alpha });
   const camera = setupDefaultCameraAndScene(scene, renderer);
 
   // if orbit control is enabled, apply orbit control and animation callback.
