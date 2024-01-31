@@ -68,11 +68,11 @@ export function getCameraCoordinates(camera) {
   const ry = loadFromLocalStorage('camera.rotation.y');
   const rz = loadFromLocalStorage('camera.rotation.z');
 
-  if ([px, py, pz].find((value) => value !== undefined)) {
+  if (any([px, py, pz])) {
     coordinates.position = new Vector3(px, py, pz);
   }
 
-  if ([rx, ry, rz].find((value) => value !== undefined)) {
+  if (any([rx, ry, rz])) {
     coordinates.rotation = new Euler(rx, ry, rz, 'XYZ');
   }
 

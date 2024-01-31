@@ -93,12 +93,30 @@ describe('getCameraCoordinates ::', () => {
 
     localStorage.setItem('camera.rotation.x', 10);
     localStorage.setItem('camera.rotation.z', 12);
+
     const coordinates = getCameraCoordinates();
+
     expect(coordinates.position.x).toEqual(0);
     expect(coordinates.position.y).toEqual(1000);
     expect(coordinates.position.z).toEqual(200);
     expect(coordinates.rotation.x).toEqual(10);
     expect(coordinates.rotation.y).toEqual(0);
     expect(coordinates.rotation.z).toEqual(12);
+  });
+
+  it('should get coordinates from localStorage even if values are 0', () => {
+    localStorage.setItem('camera.position.y', 0);
+    localStorage.setItem('camera.position.z', 0);
+
+    localStorage.setItem('camera.rotation.x', -6);
+    localStorage.setItem('camera.rotation.z', 0);
+
+    const coordinates = getCameraCoordinates();
+
+    expect(coordinates.position.y).toEqual(0);
+    expect(coordinates.position.z).toEqual(0);
+
+    expect(coordinates.rotation.x).toEqual(-6);
+    expect(coordinates.rotation.z).toEqual(0);
   });
 });
