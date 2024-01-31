@@ -45,5 +45,5 @@ import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
  * @property {HTMLCanvasElement} canvas
  * @property {Camera} camera
  * @property {Mesh} mesh
- * @property {OrbitControls} controls
+ * @property {OrbitControls | undefined} controls
  */

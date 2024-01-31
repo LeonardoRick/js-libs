@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@leonardorick/utils':
+    specifier: '>=0.0.18'
+    version: 0.0.18
   three:
     specifier: '>=0.160.1'
     version: 0.160.1
@@ -1552,6 +1555,10 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+
+  /@leonardorick/utils@0.0.18:
+    resolution: {integrity: sha512-nY1d7oma8OsoUicLVIr+BweQjwG0JMr/I1hJWlAG7YBxhsLnni2ey77sYKDP8BEnOjU8s7OVZaVIKbxoXguUnA==}
+    dev: false
 
   /@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3:
     resolution: {integrity: sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==}

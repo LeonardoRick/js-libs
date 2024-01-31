@@ -62,7 +62,8 @@ function getWorkerFIle(func, args) {
 // use window.Worker only if window is defined, otherwise extends an anonymous class.
 // this is just to be able to import the class without errors, but understand that
 // in a node environment, the runOnWorker function will not work!
-const _Worker = typeof window !== 'undefined' ? Worker : class {};
+const _Worker =
+  typeof window !== 'undefined' && typeof window.Worker !== 'undefined' ? Worker : class {};
 
 /**
  * extends worker and add the following functionalities:

@@ -42,7 +42,7 @@ export interface IminimalSetupReturnType {
   canvas: HTMLCanvasElement;
   camera: Camera;
   mesh: Mesh;
-  controls: OrbitControls;
+  controls?: OrbitControls;
 }
 
 /******************************************

@@ -1,7 +1,7 @@
 {
   "name": "@leonardorick/three",
   "type": "module",
-  "version": "1.0.30",
+  "version": "1.0.37",
   "description": "Utils Three.js function from Leonardo Rick",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
   "license": "ISC",
   "dependencies": {},
   "peerDependencies": {
-    "three": ">=0.160.1"
+    "three": ">=0.160.1",
+    "@leonardorick/utils": ">=0.0.18"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",

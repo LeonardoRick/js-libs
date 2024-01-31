@@ -12,3 +12,5 @@ export function setCameraCoordinates(
   camera: Camera,
   coordinates: ICameraCoordinates
 ): ICameraCoordinates;
+
+export function getCameraCoordinates(camera?: Camera): ICameraCoordinates;

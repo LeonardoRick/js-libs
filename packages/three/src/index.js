@@ -11,7 +11,12 @@ import {
   minimalSetup,
 } from './general.js';
 
-import { loadCameraCoordinates, saveCameraCoordinates, setCameraCoordinates } from './cameras.js';
+import {
+  loadCameraCoordinates,
+  saveCameraCoordinates,
+  setCameraCoordinates,
+  getCameraCoordinates,
+} from './cameras.js';
 import { glsl, replaceShaderImport } from './shaders.js';
 
 export {
@@ -30,6 +35,7 @@ export {
   loadCameraCoordinates,
   saveCameraCoordinates,
   setCameraCoordinates,
+  getCameraCoordinates,
 
   // shaders
   glsl,
@@ -53,6 +59,7 @@ export default {
   loadCameraCoordinates,
   saveCameraCoordinates,
   setCameraCoordinates,
+  getCameraCoordinates,
 
   // shaders
   glsl,
