@@ -28,14 +28,21 @@ export function createDefault(target = {}) {
 }
 
 /**
+ * Check if a value sent is defined
+ * @param {any} value
+ * @returns {boolean}
+ */
+export function isDefined(value) {
+  return value || value === false || value === 0;
+}
+
+/**
  * Check if a value sent is defined and is not [] nor {}
  * @param {any} value
+ * @return {boolean}
  */
 export function isDefinedAndNotEmpty(value) {
-  return (
-    (value || value === false || value === 0) &&
-    (typeof value === 'object' ? Object.keys(value).length > 0 : true)
-  );
+  return isDefined(value) && (typeof value === 'object' ? Object.keys(value).length > 0 : true);
 }
 
 /**
