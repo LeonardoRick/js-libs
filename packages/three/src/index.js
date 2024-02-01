@@ -12,35 +12,18 @@ import {
 } from './general.js';
 
 import {
+  // cameras  - CAMERAS
   loadCameraCoordinates,
   saveCameraCoordinates,
   setCameraCoordinates,
   getCameraCoordinates,
+  // cameras - CONTROLS
+  loadControlsPosition,
+  saveControlsPosition,
+  getControlsPosition,
 } from './cameras.js';
+
 import { glsl, replaceShaderImport } from './shaders.js';
-
-export {
-  // general - ESSENTIALS
-  getRendererSceneCanvas,
-  setFullScreenListener,
-  setupDefaultCameraAndScene,
-  setResizeListener,
-  updateRendererSizeRatio,
-  // general - ANIMATION
-  applyOrbitControl,
-  loopAnimation,
-  minimalSetup,
-
-  // cameras
-  loadCameraCoordinates,
-  saveCameraCoordinates,
-  setCameraCoordinates,
-  getCameraCoordinates,
-
-  // shaders
-  glsl,
-  replaceShaderImport,
-};
 
 export default {
   // general - ESSENTIALS
@@ -55,13 +38,22 @@ export default {
   loopAnimation,
   minimalSetup,
 
-  // cameras
+  // cameras - CAMERAS
   loadCameraCoordinates,
   saveCameraCoordinates,
   setCameraCoordinates,
   getCameraCoordinates,
+  // cameras - CONTROLS
+  loadControlsPosition,
+  saveControlsPosition,
+  getControlsPosition,
 
   // shaders
   glsl,
   replaceShaderImport,
 };
+
+// re-export named exports
+export * from './cameras.js';
+export * from './general.js';
+export * from './shaders.js';

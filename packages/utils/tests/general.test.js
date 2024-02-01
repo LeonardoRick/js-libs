@@ -64,6 +64,10 @@ describe('isDefined ::', () => {
     expect(isDefined(null)).toEqual(false);
     expect(isDefined(undefined)).toEqual(false);
   });
+
+  it('should return false for NaN', () => {
+    expect(isDefined(Number('batata'))).toEqual(false);
+  });
 });
 
 describe('isDefinedAndNotEmpty ::', () => {

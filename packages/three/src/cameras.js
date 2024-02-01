@@ -1,6 +1,7 @@
 import { Camera, Euler, Vector3 } from 'three';
 import * as I from '../types/typedefs/cameras.typedef.js';
 import { any } from '@leonardorick/utils';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 /**
  * load camera coordinates from localStorage
@@ -23,6 +24,18 @@ export function loadCameraCoordinates(camera) {
 }
 
 /**
+ * load controls target position
+ * @param {OrbitControls} controls
+ * @returns {Vector3} position
+ */
+export function loadControlsPosition(controls) {
+  const position = getControlsPosition();
+  if (controls) {
+    return setPosition(controls.target, position);
+  }
+  return position;
+}
+/**
  * Save camera coordinates in localStorage
  * @param {Camera} camera
  */
@@ -30,16 +43,23 @@ export function saveCameraCoordinates(camera) {
   const { x: px, y: py, z: pz } = camera.position;
 
   if (any([px, py, pz])) {
-    localStorage.setItem('camera.position.x', camera.position.x);
-    localStorage.setItem('camera.position.y', camera.position.y);
-    localStorage.setItem('camera.position.z', camera.position.z);
+    setLocalStorageCoordinate(camera.position, 'camera', 'position');
   }
   const { x: rx, y: ry, z: rz } = camera.rotation;
 
   if (any([rx, ry, rz])) {
-    localStorage.setItem('camera.rotation.x', camera.rotation.x);
-    localStorage.setItem('camera.rotation.y', camera.rotation.y);
-    localStorage.setItem('camera.rotation.z', camera.rotation.z);
+    setLocalStorageCoordinate(camera.rotation, 'camera', 'rotation');
+  }
+}
+
+/**
+ * Save controls target position
+ * @param {OrbitControls} controls
+ */
+export function saveControlsPosition(controls) {
+  const { x, y, z } = controls.target;
+  if (any([x, y, z])) {
+    setLocalStorageCoordinate(controls.target, 'controls', 'position');
   }
 }
 
@@ -60,13 +80,9 @@ export function getCameraCoordinates(camera) {
   }
 
   const coordinates = { position: undefined, rotation: undefined };
-  const px = loadFromLocalStorage('camera.position.x');
-  const py = loadFromLocalStorage('camera.position.y');
-  const pz = loadFromLocalStorage('camera.position.z');
 
-  const rx = loadFromLocalStorage('camera.rotation.x');
-  const ry = loadFromLocalStorage('camera.rotation.y');
-  const rz = loadFromLocalStorage('camera.rotation.z');
+  const { x: px, y: py, z: pz } = getLocalStorageCoordinate('camera', 'position');
+  const { x: rx, y: ry, z: rz } = getLocalStorageCoordinate('camera', 'rotation');
 
   if (any([px, py, pz])) {
     coordinates.position = new Vector3(px, py, pz);
@@ -78,6 +94,23 @@ export function getCameraCoordinates(camera) {
 
   return coordinates;
 }
+
+/**
+ * get controls target position
+ * @param {OrbitControls} controls
+ * @returns {Vector3} position
+ */
+export function getControlsPosition(controls) {
+  if (controls) {
+    return controls.target;
+  }
+  const { x, y, z } = getLocalStorageCoordinate('controls', 'position');
+  if (any([x, y, z])) {
+    return new Vector3(x, y, z);
+  }
+  // default controls.target
+  return new Vector3(0, 0, 0);
+}
 /**
  * set coordinates (position and rotation) of a camera
  * @param {Camera} camera
@@ -85,18 +118,53 @@ export function getCameraCoordinates(camera) {
  * @returns {I.ICameraCoordinates} new coordinates of the camera
  */
 export function setCameraCoordinates(camera, { position, rotation }) {
-  if (position) {
-    const { x, y, z } = position;
-    camera.position.set(x, y, z);
-  }
+  setPosition(camera.position, position);
 
   if (rotation) {
     camera.setRotationFromEuler(rotation);
   }
 
   return {
-    position: camera.position,
-    rotation: camera.rotation,
+    position: camera.position.clone(),
+    rotation: camera.rotation.clone(),
+  };
+}
+
+/**
+ * set vector3 position
+ * @param {Vector3} vector
+ * @param {Vector3} position
+ */
+function setPosition(vector, position) {
+  if (position) {
+    const { x, y, z } = position;
+    vector.set(x, y, z);
+  }
+  return vector;
+}
+
+/**
+ * set coordinate from local storage
+ * @param {{x: number, y: number, z: number}} coordinates
+ * @param {'camera' | 'controls'} object
+ * @param {'position' | 'rotation'} type
+ */
+function setLocalStorageCoordinate({ x, y, z }, object = 'camera', type = 'position') {
+  localStorage.setItem(`${object}.${type}.x`, x);
+  localStorage.setItem(`${object}.${type}.y`, y);
+  localStorage.setItem(`${object}.${type}.z`, z);
+}
+/**
+ * get coordinate from local storage
+ * @param {'camera' | 'controls'} object
+ * @param {'position' | 'rotation'} type
+ * @returns {{x: number, y: number, z: number}} position
+ */
+function getLocalStorageCoordinate(object = 'camera', type = 'position') {
+  return {
+    x: loadFromLocalStorage(`${object}.${type}.x`),
+    y: loadFromLocalStorage(`${object}.${type}.y`),
+    z: loadFromLocalStorage(`${object}.${type}.z`),
   };
 }
 
