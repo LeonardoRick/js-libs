@@ -1,4 +1,5 @@
 import { createDefault, isPlainObject, isDefined, isDefinedAndNotEmpty } from './general.js';
+import { keyboardUndoListener } from './keyboard.js';
 import { any } from './lists.js';
 import { hypotenuse, normalizeOnRange } from './math.js';
 import { runOnWorker, InlineWorker } from './run-on-worker.js';
@@ -10,6 +11,8 @@ export default {
   isPlainObject,
   isDefined,
   isDefinedAndNotEmpty,
+  // keyboard
+  keyboardUndoListener,
   // lists
   any,
   // math
@@ -25,6 +28,7 @@ export default {
 
 // re-export named exports
 export * from './general.js';
+export * from './keyboard.js';
 export * from './lists.js';
 export * from './math.js';
 export * from './run-on-worker.js';

@@ -16,6 +16,7 @@ import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
  * @property {WebGLRenderer} render
  * @property {Scene} scene
  * @property {HTMLCanvasElement} canvas
+ * @property {() => void} fullScreenHandler
  */
 
 /**
@@ -46,4 +47,6 @@ import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
  * @property {Camera} camera
  * @property {Mesh} mesh
  * @property {OrbitControls | undefined} controls
+ * @property {() => void} fullScreenHandler
+ * @property {() => void} resizeHandler
  */

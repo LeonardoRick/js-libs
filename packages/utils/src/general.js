@@ -33,7 +33,7 @@ export function createDefault(target = {}) {
  * @returns {boolean}
  */
 export function isDefined(value) {
-  return value || value === false || value === 0;
+  return !!value || value === false || value === 0;
 }
 
 /**

@@ -16,6 +16,7 @@ export interface IgetRendererSceneCanvasReturnType {
   render: WebGLRenderer;
   scene: Scene;
   canvas: HTMLCanvasElement;
+  fullScreenHandler: () => void;
 }
 
 export interface IsetupDefaultCameraAndSceneOptions {
@@ -42,6 +43,8 @@ export interface IminimalSetupReturnType {
   canvas: HTMLCanvasElement;
   camera: Camera;
   mesh: Mesh;
+  fullScreenHandler: () => void;
+  resizeHandler: () => void;
   controls?: OrbitControls;
 }
 
@@ -53,19 +56,19 @@ export function getRendererSceneCanvas(
   options?: IgetRendererSceneCanvasOptions
 ): IgetRendererSceneCanvasReturnType;
 
-export function setFullScreenListener(canvas: HTMLCanvasElement): void;
+export function setFullScreenListener(canvas: HTMLCanvasElement): () => void;
 
 export function setupDefaultCameraAndScene(
   scene: Scene,
   renderer: WebGLRenderer,
   options?: IsetupDefaultCameraAndSceneOptions
-): Camera;
+): { camera: Camera; resizeHandler: () => void };
 
 export function setResizeListener(
   camera: Camera,
   renderer: WebGLRenderer,
   composer?: EffectComposer
-): void;
+): () => void;
 
 export function updateRendererSizeRatio(renderer: Renderer, width: number, height: number): void;
 

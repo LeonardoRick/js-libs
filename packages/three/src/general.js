@@ -35,7 +35,8 @@ export function getRendererSceneCanvas(
   const renderer = new WebGLRenderer({ canvas, antialias, powerPreference, alpha });
   const scene = new Scene();
   updateRendererSizeRatio(renderer, width, height);
-  allowFullScreen && setFullScreenListener(canvas);
+
+  const fullScreenHandler = allowFullScreen ? setFullScreenListener(canvas) : () => {};
 
   if (applyCanvasStyle) {
     canvas.style.position = 'fixed';
@@ -43,21 +44,24 @@ export function getRendererSceneCanvas(
     canvas.style.left = 0;
     canvas.style.outline = 'none';
   }
-  return { renderer, scene, canvas };
+  return { renderer, scene, canvas, fullScreenHandler };
 }
 
 /**
  *
  * @param {HTMLCanvasElement} canvas
+ * @returns {() => void} handler to be removed later if needed
  */
 export function setFullScreenListener(canvas) {
-  canvas.addEventListener('dblclick', () => {
+  const handler = () => {
     if (!document.fullscreenElement) {
       canvas.requestFullscreen();
     } else {
       document.exitFullscreen();
     }
-  });
+  };
+  canvas.addEventListener('dblclick', handler);
+  return handler;
 }
 
 /**
@@ -65,7 +69,7 @@ export function setFullScreenListener(canvas) {
  * @param {Scene} scene
  * @param {WebGLRenderer} renderer
  * @param {I.IsetupDefaultCameraAndSceneOptions} options
- * @returns {Camera}
+ * @returns {{camera: Camera, resizeHandler: () => void}}
  */
 export function setupDefaultCameraAndScene(
   scene,
@@ -88,8 +92,8 @@ export function setupDefaultCameraAndScene(
   }
   scene.add(_camera); // https://github.com/mrdoob/three.js/issues/1046
   renderer.render(scene, _camera);
-  resize && setResizeListener(_camera, renderer);
-  return _camera;
+  const resizeHandler = resize ? setResizeListener(_camera, renderer) : () => {};
+  return { camera: _camera, resizeHandler };
 }
 
 /**
@@ -97,9 +101,10 @@ export function setupDefaultCameraAndScene(
  * @param {Camera} camera
  * @param {WebGLRenderer} renderer
  * @param {EffectComposer} composer
+ * @returns {() => void} resizehandler to be removed later if needed
  */
 export function setResizeListener(camera, renderer, composer = null) {
-  window.addEventListener('resize', () => {
+  const handler = () => {
     // Update camera
     camera.aspect = window.innerWidth / window.innerHeight;
     // after updating camera we need to notify the camera to update the matrix
@@ -111,7 +116,9 @@ export function setResizeListener(camera, renderer, composer = null) {
     if (composer) {
       updateRendererSizeRatio(composer, window.innerWidth, window.innerHeight);
     }
-  });
+  };
+  window.addEventListener('resize', handler);
+  return handler;
 }
 
 /**
@@ -189,8 +196,10 @@ export function minimalSetup({
   alpha = true,
 } = {}) {
   let controls;
-  const { renderer, scene, canvas } = getRendererSceneCanvas(canvasId, { alpha });
-  const camera = setupDefaultCameraAndScene(scene, renderer);
+  const { renderer, scene, canvas, fullScreenHandler } = getRendererSceneCanvas(canvasId, {
+    alpha,
+  });
+  const { camera, resizeHandler } = setupDefaultCameraAndScene(scene, renderer);
 
   // if orbit control is enabled, apply orbit control and animation callback.
   // if not, check if we have an animationCallback to apply it alone
@@ -212,5 +221,7 @@ export function minimalSetup({
     camera,
     mesh,
     controls,
+    fullScreenHandler,
+    resizeHandler,
   };
 }
