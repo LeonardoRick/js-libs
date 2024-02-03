@@ -1,4 +1,5 @@
 import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 
 /**
  * @typedef {Object} IgetRendererSceneCanvasOptions
@@ -28,14 +29,26 @@ import { WebGLRenderer, Scene, Mesh, Camera } from 'three';
  * @property {Camera} camera
  * @property {number} near
  * @property {number} far
+ * @property {({renderer: WebGLRenderer}) => void}} resizeCallback
  */
 
+/**
+ * @typedef {Object} IresizeCallback
+ * @property {({WebGLRenderer} renderer) => void} callback
+ */
+
+/**
+ * @typedef {Object} IsetResizeListenerOptions
+ * @property {EffectComposer} composer
+ * @property {{resizeCallback: IresizeCallback}} options
+ */
 /**
  * @typedef {Object} IminimalSetupOptions
  * @property {string} canvasId
  * @property {Mesh} mesh
  * @property {boolean} enableOrbitControl
  * @property {Function} animationCallback
+ * @property {Function} resizeCallback
  * @property {boolean} alpha
  */
 

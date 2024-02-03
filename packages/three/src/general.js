@@ -1,5 +1,4 @@
 import { Scene, PerspectiveCamera, WebGLRenderer, Camera, Mesh, BoxGeometry } from 'three';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as I from '../types/typedefs/general.typedef.js';
 
@@ -82,6 +81,7 @@ export function setupDefaultCameraAndScene(
     camera = null,
     near = 0.1,
     far = 2000,
+    resizeCallback = () => {},
   } = {}
 ) {
   const _camera = camera || new PerspectiveCamera(75, width / height, near, far);
@@ -92,7 +92,9 @@ export function setupDefaultCameraAndScene(
   }
   scene.add(_camera); // https://github.com/mrdoob/three.js/issues/1046
   renderer.render(scene, _camera);
-  const resizeHandler = resize ? setResizeListener(_camera, renderer) : () => {};
+  const resizeHandler = resize
+    ? setResizeListener(_camera, renderer, { resizeCallback })
+    : () => {};
   return { camera: _camera, resizeHandler };
 }
 
@@ -100,11 +102,16 @@ export function setupDefaultCameraAndScene(
  *
  * @param {Camera} camera
  * @param {WebGLRenderer} renderer
- * @param {EffectComposer} composer
+ * @param {I.IsetResizeListenerOptions} options
  * @returns {() => void} resizehandler to be removed later if needed
  */
-export function setResizeListener(camera, renderer, composer = null) {
+export function setResizeListener(
+  camera,
+  renderer,
+  { composer = null, resizeCallback = () => {} } = {}
+) {
   const handler = () => {
+    resizeCallback({ renderer });
     // Update camera
     camera.aspect = window.innerWidth / window.innerHeight;
     // after updating camera we need to notify the camera to update the matrix
@@ -192,14 +199,14 @@ export function minimalSetup({
   // keep animationCallback as undefined so applyOrbitControl
   // can override it with an empty function when nothing passed
   animationCallback = undefined,
-
+  resizeCallback = undefined,
   alpha = true,
 } = {}) {
   let controls;
   const { renderer, scene, canvas, fullScreenHandler } = getRendererSceneCanvas(canvasId, {
     alpha,
   });
-  const { camera, resizeHandler } = setupDefaultCameraAndScene(scene, renderer);
+  const { camera, resizeHandler } = setupDefaultCameraAndScene(scene, renderer, { resizeCallback });
 
   // if orbit control is enabled, apply orbit control and animation callback.
   // if not, check if we have an animationCallback to apply it alone

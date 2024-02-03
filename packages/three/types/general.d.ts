@@ -19,6 +19,10 @@ export interface IgetRendererSceneCanvasReturnType {
   fullScreenHandler: () => void;
 }
 
+interface IresizeCallbackOptions {
+  renderer: WebGLRenderer;
+}
+
 export interface IsetupDefaultCameraAndSceneOptions {
   mesh?: Mesh;
   resize?: boolean;
@@ -27,13 +31,18 @@ export interface IsetupDefaultCameraAndSceneOptions {
   camera?: Camera;
   near?: number;
   far?: number;
+  resizeCallback: (options: IresizeCallbackOptions) => void;
 }
 
+interface IresizeCallbackOptions {
+  renderer: WebGLRenderer;
+}
 export interface IminimalSetupOptions {
   canvasId?: string;
   mesh?: Mesh;
   enableOrbitControl?: boolean;
   animationCallback?: Function;
+  resizeCallback: (options: IresizeCallbackOptions) => void;
   alpha?: boolean;
 }
 

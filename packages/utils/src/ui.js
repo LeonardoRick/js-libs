@@ -35,6 +35,9 @@ export function getCursorCenterDistance({
 } = {}) {
   const container = box || document.querySelector('html');
 
+  /**
+   * @param {MouseEvent} e
+   */
   const handler = (e) => {
     const x = e.clientX - container.offsetWidth / 2;
     const y = e.clientY - container.offsetHeight / 2;
