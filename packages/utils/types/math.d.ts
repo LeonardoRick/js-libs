@@ -1,9 +1,7 @@
 export function hypotenuse(cat1: number, cat2: number): number;
 
-export function normalizeOnRange(
+export function normalize(
   value: number,
   maxValue: number,
-  minRange: number,
-  maxRange: number,
-  options?: { inverted?: boolean }
+  options?: { inverted?: boolean; min: number; max: number }
 ): number;

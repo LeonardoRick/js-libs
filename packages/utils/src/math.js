@@ -11,30 +11,34 @@ export function hypotenuse(cat1, cat2, { decimals = 2 } = {}) {
 /**
  * normalize a value based on another.
  * @param {number} value that we want to normalized based on another
- * @param {number} maxValue that our current value can reach. This is important so we can
+ * @param {number} normalizer that our current value can reach. This is important so we can
  * first normalize it between 0 and 1 (const normalized)
- * @param {number} minRange minimum value on range that we want to clamp the real value. If
+ * @param {{min: number, max: number, inverted: boolean }} options
+ *
+ * min: minimum value on range that we want to clamp the real value. If
  * if the real value can reach 0 and or minRange is 100, when real value is 0 our minRange will
  * be 100
- * @param {number} maxRange maximum value on range that we want to clamp the real value. If
+ *
+ * max: maximum value on range that we want to clamp the real value. If
  * if the real value can reach 100 and maxRange is 1000, when real value is 100 our maxRange
  * will be 1000
- * @param {{inverted: boolean}} options . When inverted is true we invert the logic. Usually
- * our value and maxValue are distances. And in case of distances, as variable value is smaller
- * (which means our distance is lower to our point of reference) we want to emphasize somehting,
- * so when inverted is true, as 'value' tends to 0,the returned value is closer to maxRange
+ *
+ * inverted: is true we invert the logic. Usually our value and normalizer are distances. And in
+ * case of distances, as variable value is smaller (which means our distance is lower to our
+ * point of reference) we want to emphasize somehting, so when inverted is true, as 'value'
+ * tends to 0,the returned value is closer to maxRange
  * @returns {number} normalized value
  */
-export function normalizeOnRange(value, maxValue, minRange, maxRange, { inverted = false } = {}) {
+export function normalize(value, normalizer, { min = 0, max = 1, inverted = false } = {}) {
   // Calculate the normalized value as a proportion of max
-  const normalized = value / maxValue;
+  const normalized = value / normalizer;
   // Interpolate between minRange and maxRange
   const offset = 1 - normalized;
-  const min = inverted ? maxRange : minRange;
-  const max = inverted ? minRange : maxRange;
-  const interpolated = offset * min + normalized * max;
+  const _min = inverted ? max : min;
+  const _max = inverted ? min : max;
+  const interpolated = offset * _min + normalized * _max;
   // Clamp to ensure the result is within the desired range
-  return Math.min(Math.max(interpolated, minRange), maxRange);
+  return Math.min(Math.max(interpolated, min), max);
 }
 
 /**

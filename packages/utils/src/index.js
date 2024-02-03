@@ -1,7 +1,7 @@
 import { createDefault, isPlainObject, isDefined, isDefinedAndNotEmpty } from './general.js';
 import { keyboardUndoListener } from './keyboard.js';
 import { any } from './lists.js';
-import { hypotenuse, normalizeOnRange } from './math.js';
+import { hypotenuse, normalize } from './math.js';
 import { runOnWorker, InlineWorker } from './run-on-worker.js';
 import { moveTagToCursorPosition, getCursorCenterDistance } from './ui.js';
 
@@ -17,7 +17,7 @@ export default {
   any,
   // math
   hypotenuse,
-  normalizeOnRange,
+  normalize,
   // run on worker
   runOnWorker,
   InlineWorker,

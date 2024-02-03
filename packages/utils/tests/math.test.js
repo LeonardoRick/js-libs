@@ -1,4 +1,4 @@
-import { hypotenuse, normalizeOnRange, round } from '../src/math';
+import { hypotenuse, normalize, round } from '../src/math';
 
 describe('hypotenuse', () => {
   it('should return hypotenuse for a square triangle', () => {
@@ -14,18 +14,18 @@ describe('hypotenuse', () => {
   });
 });
 
-describe('normalizeOnRange', () => {
+describe('normalize', () => {
   it('should normalize a number to minRange if value is 0', () => {
-    expect(normalizeOnRange(0, 10, 5, 20)).toEqual(5);
+    expect(normalize(0, 10, { min: 5, max: 20 })).toEqual(5);
   });
 
   it('should normalize to maxRange if number reaches maxValue', () => {
-    expect(normalizeOnRange(10, 10, 5, 20)).toEqual(20);
+    expect(normalize(10, 10, { min: 5, max: 20 })).toEqual(20);
   });
 
   it('should return ranges if number extrapolate ranges', () => {
-    expect(normalizeOnRange(-10, 10, 100, 1000)).toEqual(100);
-    expect(normalizeOnRange(2000, 10, 100, 1000)).toEqual(1000);
+    expect(normalize(-10, 10, { min: 100, max: 1000 })).toEqual(100);
+    expect(normalize(2000, 10, { min: 100, max: 1000 })).toEqual(1000);
   });
 });
 
