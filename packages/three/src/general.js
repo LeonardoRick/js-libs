@@ -201,6 +201,7 @@ export function minimalSetup({
   animationCallback = undefined,
   resizeCallback = undefined,
   alpha = true,
+  addMeshOnScene = true,
 } = {}) {
   let controls;
   const { renderer, scene, canvas, fullScreenHandler } = getRendererSceneCanvas(canvasId, {
@@ -216,9 +217,11 @@ export function minimalSetup({
     loopAnimation(renderer, scene, camera, animationCallback);
   }
 
-  const m = mesh || new Mesh(new BoxGeometry(1, 1, 1));
-  m.material.color?.setHex(0xff0000);
-  scene.add(m);
+  mesh = mesh || new Mesh(new BoxGeometry(1, 1, 1));
+  mesh.material.color?.setHex(0xff0000);
+  if (addMeshOnScene) {
+    scene.add(mesh);
+  }
 
   renderer.render(scene, camera);
   return {

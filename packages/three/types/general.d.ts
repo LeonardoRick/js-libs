@@ -44,6 +44,7 @@ export interface IminimalSetupOptions {
   animationCallback?: Function;
   resizeCallback?: (options: IresizeCallbackOptions) => void;
   alpha?: boolean;
+  addMeshOnScene?: boolean;
 }
 
 export interface IminimalSetupReturnType {

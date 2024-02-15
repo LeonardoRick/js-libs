@@ -32,7 +32,8 @@ export function hypotenuse(cat1, cat2, { decimals = 2 } = {}) {
 export function normalize(value, normalizer, { min = 0, max = 1, inverted = false } = {}) {
   // Calculate the normalized value as a proportion of max
   const normalized = value / normalizer;
-  // Interpolate between minRange and maxRange
+  // Interpolate between min and max to handle
+  // different values besides 0 and 1
   const offset = 1 - normalized;
   const _min = inverted ? max : min;
   const _max = inverted ? min : max;
