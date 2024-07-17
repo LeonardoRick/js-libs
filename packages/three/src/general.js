@@ -153,7 +153,7 @@ export function updateRendererSizeRatio(renderer, width, height) {
  * @param {WebGLRenderer} renderer
  * @param {Scene} scene
  * @param {Function} animationCallback
- * @returns {OrbitControls}
+ * @returns {{controls: OrbitControls, animationid: number}}
  */
 export function applyOrbitControl(camera, canvas, renderer, scene, animationCallback = () => {}) {
   const controls = new OrbitControls(camera, canvas);
@@ -161,11 +161,11 @@ export function applyOrbitControl(camera, canvas, renderer, scene, animationCall
   controls.update();
   // controls.update is required inside animation frame
   //if controls.enableDamping or controls.autoRotate are set to true
-  loopAnimation(renderer, scene, camera, () => {
+  const animationId = loopAnimation(renderer, scene, camera, () => {
     controls.update();
     animationCallback({ renderer, scene, camera });
   });
-  return controls;
+  return { controls, animationId };
 }
 
 /**
@@ -176,14 +176,15 @@ export function applyOrbitControl(camera, canvas, renderer, scene, animationCall
  * @param {Scene} scene
  * @param {Camera} camera
  * @param {Function} callback
+ * @returns {number} animation id so we can call cancelAnimationFrame(animationId) in the future
  */
 export function loopAnimation(renderer, scene, camera, callback = () => {}) {
   const animate = () => {
     callback({ renderer, scene, camera });
     renderer.render(scene, camera);
-    window.requestAnimationFrame(animate);
+    return window.requestAnimationFrame(animate);
   };
-  animate();
+  return animate();
 }
 
 /**
@@ -204,6 +205,7 @@ export function minimalSetup({
   addMeshOnScene = true,
 } = {}) {
   let controls;
+  let animationId;
   const { renderer, scene, canvas, fullScreenHandler } = getRendererSceneCanvas(canvasId, {
     alpha,
   });
@@ -212,9 +214,15 @@ export function minimalSetup({
   // if orbit control is enabled, apply orbit control and animation callback.
   // if not, check if we have an animationCallback to apply it alone
   if (enableOrbitControl) {
-    controls = applyOrbitControl(camera, canvas, renderer, scene, animationCallback);
+    ({ controls, animationId } = applyOrbitControl(
+      camera,
+      canvas,
+      renderer,
+      scene,
+      animationCallback
+    ));
   } else if (animationCallback) {
-    loopAnimation(renderer, scene, camera, animationCallback);
+    animationId = loopAnimation(renderer, scene, camera, animationCallback);
   }
 
   mesh = mesh || new Mesh(new BoxGeometry(1, 1, 1));
@@ -231,6 +239,7 @@ export function minimalSetup({
     camera,
     mesh,
     controls,
+    animationId,
     fullScreenHandler,
     resizeHandler,
   };

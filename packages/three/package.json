@@ -1,7 +1,7 @@
 {
   "name": "@leonardorick/three",
   "type": "module",
-  "version": "1.0.51",
+  "version": "1.0.52",
   "description": "Utils Three.js function from Leonardo Rick",
   "main": "index.js",
   "scripts": {

@@ -56,6 +56,7 @@ export interface IminimalSetupReturnType {
   fullScreenHandler: () => void;
   resizeHandler: () => void;
   controls?: OrbitControls;
+  animationid?: number;
 }
 
 /******************************************
@@ -92,13 +93,13 @@ export function applyOrbitControl(
   renderer: WebGLRenderer,
   scene: Scene,
   animationCallback?: Function
-): OrbitControls;
+): { controls: OrbitControls; animationId: number };
 
 export function loopAnimation(
   renderer: WebGLRenderer,
   scene: Scene,
   camera: Camera,
   callback?: Function
-): void;
+): number;
 
 export function minimalSetup(options?: IminimalSetupOptions): IminimalSetupReturnType;

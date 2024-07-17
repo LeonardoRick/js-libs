@@ -60,6 +60,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * @property {Camera} camera
  * @property {Mesh} mesh
  * @property {OrbitControls | undefined} controls
+ * @property {number} animationId
  * @property {() => void} fullScreenHandler
  * @property {() => void} resizeHandler
  */
