@@ -1,6 +1,6 @@
 {
   "name": "@leonardorick/utils",
-  "version": "0.0.25",
+  "version": "0.0.27",
   "type": "module",
   "description": "Utils JS functions from Leonardo Rick",
   "main": "index.js",

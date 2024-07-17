@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <script
+        src="../../index.js"
+        type="module"
+    ></script>
+    <script
+        src="./index.js"
+        type="module"
+    ></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div
+        id="mouseLight"
+        class="mouse-gradient"
+    ></div>
+</body>
+<style>
+    .mouse-gradient {
+        background: repeating-linear-gradient(to right, #00dc82 0%, #1de0b1 50%, #36e4da 100%);
+        filter: blur(100px);
+        opacity: 0.5;
+        position: absolute;
+        top: 0;
+        $size: 200px;
+        height: $size;
+        width: $size;
+    }
+</style>
+
+</html>

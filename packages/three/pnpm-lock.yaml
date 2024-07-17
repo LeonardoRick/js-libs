@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@leonardorick/utils':
-    specifier: '>=0.0.20'
-    version: 0.0.20
+    specifier: '>=0.0.27'
+    version: 0.0.27
   three:
     specifier: '>=0.160.1'
     version: 0.160.1
@@ -1556,8 +1556,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@leonardorick/utils@0.0.20:
-    resolution: {integrity: sha512-W9H7Ztogg6yW7pQ0e3j4m0mXTUi+ayLA+ZQb1tNCf6PUbM669CkYu+M85vedSH7sPDkpYRa/5L3bWA8jCi+51A==}
+  /@leonardorick/utils@0.0.27:
+    resolution: {integrity: sha512-B+PJj3dacugoZpQcFdG+pYlGGYrkIuXLYPJ0AHVYEdGnEaAD4uNmqBoU80tkMeC7owpi5mOne3/b9SqmgVgq6Q==}
     dev: false
 
   /@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3:

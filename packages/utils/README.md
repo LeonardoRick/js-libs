@@ -16,7 +16,7 @@ Javascript functions that are useful to be re-used
 
 ### publish
 
-    pnpm vresion patch
+    pnpm version patch
     pnpm run build
     git commit -m "<message>"
     git push
@@ -57,3 +57,7 @@ import { hypotenuse, round } from './math.js'; // right
 //...
 import { hypotenuse, round } from './math'; // wrong
 ```
+
+### Examples
+
+You can go for any example index.html and open the file to check some useful examples of the usage of the package

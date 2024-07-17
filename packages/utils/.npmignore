@@ -2,6 +2,7 @@ node_modules/
 tests/
 coverage/
 src/
+examples/
 
 .prettierrc
 jest.config.js
