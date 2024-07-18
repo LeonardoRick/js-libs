@@ -9,8 +9,8 @@ dependencies:
     specifier: '>=0.0.27'
     version: 0.0.27
   three:
-    specifier: '>=0.160.1'
-    version: 0.160.1
+    specifier: '>=0.166.1'
+    version: 0.166.1
 
 devDependencies:
   '@babel/cli':
@@ -29,8 +29,8 @@ devDependencies:
     specifier: ^29.5.11
     version: 29.5.11
   '@types/three':
-    specifier: ^0.160.0
-    version: 0.160.0
+    specifier: ^0.166.0
+    version: 0.166.0
   jest:
     specifier: ^29.7.0
     version: 29.7.0
@@ -1587,6 +1587,10 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
+  /@tweenjs/tween.js@23.1.2:
+    resolution: {integrity: sha512-kMCNaZCJugWI86xiEHaY338CU5JpD0B97p1j1IKNn/Zto8PgACjQx0UxbHjmOcLl/dDOBnItwD07KmCs75pxtQ==}
+    dev: true
+
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
@@ -1667,12 +1671,13 @@ packages:
     resolution: {integrity: sha512-pXNfAD3KHOdif9EQXZ9deK82HVNaXP5ZIF5RP2QG6OQFNTaY2YIetfrE9t528vEreGQvEPRDDc8muaoYeK0SxQ==}
     dev: true
 
-  /@types/three@0.160.0:
-    resolution: {integrity: sha512-jWlbUBovicUKaOYxzgkLlhkiEQJkhCVvg4W2IYD2trqD2om3VK4DGLpHH5zQHNr7RweZK/5re/4IVhbhvxbV9w==}
+  /@types/three@0.166.0:
+    resolution: {integrity: sha512-FHMnpcdhdbdOOIYbfkTkUVpYMW53odxbTRwd0/xJpYnTzEsjnVnondGAvHZb4z06UW0vo6WPVuvH0/9qrxKx7g==}
     dependencies:
+      '@tweenjs/tween.js': 23.1.2
       '@types/stats.js': 0.17.3
       '@types/webxr': 0.5.11
-      fflate: 0.6.10
+      fflate: 0.8.2
       meshoptimizer: 0.18.1
     dev: true
 
@@ -2274,8 +2279,8 @@ packages:
       bser: 2.1.1
     dev: true
 
-  /fflate@0.6.10:
-    resolution: {integrity: sha512-IQrh3lEPM93wVCEczc9SaAOvkmcoQn/G8Bo1e8ZPlY3X3bnAxWaBdvTdvM1hP62iZp0BXWDy4vTAy4fF0+Dlpg==}
+  /fflate@0.8.2:
+    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
     dev: true
 
   /fill-range@7.0.1:
@@ -3613,8 +3618,8 @@ packages:
       minimatch: 3.1.2
     dev: true
 
-  /three@0.160.1:
-    resolution: {integrity: sha512-Bgl2wPJypDOZ1stAxwfWAcJ0WQf7QzlptsxkjYiURPz+n5k4RBDLsq+6f9Y75TYxn6aHLcWz+JNmwTOXWrQTBQ==}
+  /three@0.166.1:
+    resolution: {integrity: sha512-LtuafkKHHzm61AQA1be2MAYIw1IjmhOUxhBa0prrLpEMWbV7ijvxCRHjSgHPGp2493wLBzwKV46tA9nivLEgKg==}
     dev: false
 
   /tmpl@1.0.5:
