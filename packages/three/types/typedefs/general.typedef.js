@@ -50,6 +50,10 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * @property {Function} animationCallback
  * @property {Function} resizeCallback
  * @property {boolean} alpha
+ * antialias affects performance but gives a better rendering
+ * @property {boolean} antialias
+ * powerPreference options: 'high-performance' | 'low-power' | 'default'
+ * @property {'high-performance' | 'lower-power' | 'default'} powerPreference,
  */
 
 /**

@@ -203,11 +203,17 @@ export function minimalSetup({
   resizeCallback = undefined,
   alpha = true,
   addMeshOnScene = true,
+  // antialias affects performance but gives a better rendering
+  antialias = false,
+  // powerPreference options: 'high-performance' | 'low-power' | 'default'
+  powerPreference = 'default',
 } = {}) {
   let controls;
   let animationId;
   const { renderer, scene, canvas, fullScreenHandler } = getRendererSceneCanvas(canvasId, {
     alpha,
+    antialias,
+    powerPreference,
   });
   const { camera, resizeHandler } = setupDefaultCameraAndScene(scene, renderer, { resizeCallback });
 

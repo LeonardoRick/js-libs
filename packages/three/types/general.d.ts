@@ -45,6 +45,10 @@ export interface IminimalSetupOptions {
   resizeCallback?: (options: IresizeCallbackOptions) => void;
   alpha?: boolean;
   addMeshOnScene?: boolean;
+  // antialias affects performance but gives a better rendering
+  antialias: boolean;
+  // powerPreference options: 'high-performance' | 'low-power' | 'default'
+  powerPreference: 'default' | 'lower-power' | 'high-performance';
 }
 
 export interface IminimalSetupReturnType {
