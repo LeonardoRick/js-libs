@@ -29,6 +29,7 @@ If you are going to add a new "module" (file) make sure to keep the same structu
 
 2. `tests/`
    Any function should have at least one test for it implementation. Preferably the module will have more than one test per function implement to contemplate multiple scenarios
+
 3. `types/`
    The signature of the exported classes/functions should be present on `types/` as a `.d.ts` file. This file should also be imported on the `types/index.d.ts` so all types of the exported package members can be properly infered by IDE's
 
