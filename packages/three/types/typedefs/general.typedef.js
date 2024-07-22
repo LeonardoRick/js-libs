@@ -50,6 +50,8 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * @property {Function} animationCallback
  * @property {Function} resizeCallback
  * @property {boolean} alpha
+ * @property {boolean} addMeshOnScene
+ * @property {boolean} allowFullScreen
  * antialias affects performance but gives a better rendering
  * @property {boolean} antialias
  * powerPreference options: 'high-performance' | 'low-power' | 'default'

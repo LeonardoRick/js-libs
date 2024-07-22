@@ -1,4 +1,4 @@
-import type { Scene, Camera, WebGLRenderer } from 'three';
+import type { Scene, Camera, WebGLRenderer, Mesh } from 'three';
 import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -45,10 +45,11 @@ export interface IminimalSetupOptions {
   resizeCallback?: (options: IresizeCallbackOptions) => void;
   alpha?: boolean;
   addMeshOnScene?: boolean;
+  allowFullScreen?: boolean;
   // antialias affects performance but gives a better rendering
-  antialias: boolean;
+  antialias?: boolean;
   // powerPreference options: 'high-performance' | 'low-power' | 'default'
-  powerPreference: 'default' | 'lower-power' | 'high-performance';
+  powerPreference?: 'default' | 'lower-power' | 'high-performance';
 }
 
 export interface IminimalSetupReturnType {
@@ -107,3 +108,5 @@ export function loopAnimation(
 ): number;
 
 export function minimalSetup(options?: IminimalSetupOptions): IminimalSetupReturnType;
+
+export function isMesh(object?: Object3D): object is Mesh;

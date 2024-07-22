@@ -203,6 +203,7 @@ export function minimalSetup({
   resizeCallback = undefined,
   alpha = true,
   addMeshOnScene = true,
+  allowFullScreen = true,
   // antialias affects performance but gives a better rendering
   antialias = false,
   // powerPreference options: 'high-performance' | 'low-power' | 'default'
@@ -214,6 +215,7 @@ export function minimalSetup({
     alpha,
     antialias,
     powerPreference,
+    allowFullScreen,
   });
   const { camera, resizeHandler } = setupDefaultCameraAndScene(scene, renderer, { resizeCallback });
 
@@ -249,4 +251,13 @@ export function minimalSetup({
     fullScreenHandler,
     resizeHandler,
   };
+}
+
+/**
+ * Type guard to check if an object is of type THREE.Mesh
+ * @param {THREE.Object3D} object
+ * @returns {boolean}
+ */
+export function isMesh(object) {
+  return object?.type === 'Mesh';
 }

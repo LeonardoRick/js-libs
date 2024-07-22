@@ -9,6 +9,9 @@ import {
   applyOrbitControl,
   loopAnimation,
   minimalSetup,
+
+  // general - TYPE CHECKERS
+  isMesh,
 } from './general.js';
 
 import {
@@ -40,6 +43,9 @@ export default {
   applyOrbitControl,
   loopAnimation,
   minimalSetup,
+
+  // general - TYPE CHECKERS
+  isMesh,
 
   // cameras - CAMERAS
   loadCameraCoordinates,
