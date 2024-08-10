@@ -6,15 +6,16 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * @property {number} width
  * @property {number} height
  * @property {boolean} alpha
+ * @property {boolean} applyCanvasStyle
+ * @property {Object} styles
  * @property {boolean} allowFullScreen
  * @property {boolean} antialias
  * @property {string} powerPreference
- * @property {boolean} applyCanvasStyle
  */
 
 /**
  * @typedef {Object} IgetRendererSceneCanvasReturnType
- * @property {WebGLRenderer} render
+ * @property {WebGLRenderer} renderer
  * @property {Scene} scene
  * @property {HTMLCanvasElement} canvas
  * @property {() => void} fullScreenHandler
@@ -47,9 +48,12 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * @property {string} canvasId
  * @property {Mesh} mesh
  * @property {boolean} enableOrbitControl
+ * @property {boolean} orbitControlHandleOnlyCanvasEvents
  * @property {Function} animationCallback
  * @property {Function} resizeCallback
  * @property {boolean} alpha
+ * @property {boolean} applyCanvasStyle
+ * @property {Object} styles
  * @property {boolean} addMeshOnScene
  * @property {boolean} allowFullScreen
  * antialias affects performance but gives a better rendering

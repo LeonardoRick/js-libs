@@ -1,19 +1,20 @@
-import type { Scene, Camera, WebGLRenderer, Mesh } from 'three';
+import type { Scene, Camera, WebGLRenderer, Mesh, WebGLRenderer } from 'three';
 import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 export interface IgetRendererSceneCanvasOptions {
   width?: number;
   height?: number;
   alpha?: number;
+  applyCanvasStyle?: boolean;
+  styles?: object;
   allowFullScreen?: boolean;
   antialias?: boolean;
   powerPreference?: string;
-  applyCanvasStyle?: boolean;
 }
 
 export interface IgetRendererSceneCanvasReturnType {
-  render: WebGLRenderer;
+  renderer: WebGLRenderer;
   scene: Scene;
   canvas: HTMLCanvasElement;
   fullScreenHandler: () => void;
@@ -21,6 +22,12 @@ export interface IgetRendererSceneCanvasReturnType {
 
 interface IresizeCallbackOptions {
   renderer: WebGLRenderer;
+}
+
+interface IAnimationCallbackOptions {
+  renderer: WebGLRenderer;
+  scene: Scene;
+  camera: Camera;
 }
 
 export interface IsetupDefaultCameraAndSceneOptions {
@@ -41,9 +48,12 @@ export interface IminimalSetupOptions {
   canvasId?: string;
   mesh?: Mesh;
   enableOrbitControl?: boolean;
-  animationCallback?: Function;
+  orbitControlHandleOnlyCanvasEvents?: boolean;
+  animationCallback?: (options: IAnimationCallbackOptions) => void;
   resizeCallback?: (options: IresizeCallbackOptions) => void;
   alpha?: boolean;
+  applyCanvasStyle?: boolean;
+  styles?: Object;
   addMeshOnScene?: boolean;
   allowFullScreen?: boolean;
   // antialias affects performance but gives a better rendering
@@ -86,7 +96,11 @@ export function setResizeListener(
   composer?: EffectComposer
 ): () => void;
 
-export function updateRendererSizeRatio(renderer: Renderer, width: number, height: number): void;
+export function updateRendererSizeRatio(
+  renderer: WebGLRenderer,
+  width: number,
+  height: number
+): void;
 
 /******************************************
  * ANIMATION
@@ -97,14 +111,14 @@ export function applyOrbitControl(
   canvas: HTMLCanvasElement,
   renderer: WebGLRenderer,
   scene: Scene,
-  animationCallback?: Function
+  options?: { animationCallback?: Function; handleOnlyCanvasEvents?: boolean }
 ): { controls: OrbitControls; animationId: number };
 
 export function loopAnimation(
   renderer: WebGLRenderer,
   scene: Scene,
   camera: Camera,
-  callback?: Function
+  callback?: (options: IAnimationCallbackOptions) => void
 ): number;
 
 export function minimalSetup(options?: IminimalSetupOptions): IminimalSetupReturnType;

@@ -19,6 +19,7 @@ export function getRendererSceneCanvas(
     height = window.innerHeight,
     allowFullScreen = true,
     applyCanvasStyle = true,
+    styles = {},
     /**
      * renderer options
      */
@@ -37,12 +38,20 @@ export function getRendererSceneCanvas(
 
   const fullScreenHandler = allowFullScreen ? setFullScreenListener(canvas) : () => {};
 
+  // apply styles on the canvas so it fills the screen
   if (applyCanvasStyle) {
     canvas.style.position = 'fixed';
     canvas.style.top = 0;
     canvas.style.left = 0;
     canvas.style.outline = 'none';
+    canvas.style.padding = 0;
+    canvas.style.margin = 0;
   }
+
+  for (const [key, value] of Object.entries(styles)) {
+    canvas.style[key] = value;
+  }
+
   return { renderer, scene, canvas, fullScreenHandler };
 }
 
@@ -152,11 +161,17 @@ export function updateRendererSizeRatio(renderer, width, height) {
  * @param {HTMLCanvasElement} canvas
  * @param {WebGLRenderer} renderer
  * @param {Scene} scene
- * @param {Function} animationCallback
+ * @param {animationCallback: Function, handleOnlyCanvasEvents: boolean} options
  * @returns {{controls: OrbitControls, animationid: number}}
  */
-export function applyOrbitControl(camera, canvas, renderer, scene, animationCallback = () => {}) {
-  const controls = new OrbitControls(camera, canvas);
+export function applyOrbitControl(
+  camera,
+  canvas,
+  renderer,
+  scene,
+  { animationCallback = () => {}, handleOnlyCanvasEvents = false } = {}
+) {
+  const controls = new OrbitControls(camera, handleOnlyCanvasEvents ? canvas : document.body);
   controls.enableDamping = true;
   controls.update();
   // controls.update is required inside animation frame
@@ -197,13 +212,20 @@ export function minimalSetup({
   canvasId = 'webgl',
   mesh = null,
   enableOrbitControl = true,
+  orbitControlHandleOnlyCanvasEvents = false,
   // keep animationCallback as undefined so applyOrbitControl
   // can override it with an empty function when nothing passed
   animationCallback = undefined,
   resizeCallback = undefined,
-  alpha = true,
+
   addMeshOnScene = true,
   allowFullScreen = true,
+  /**
+   * getRendererSceneCanvas options
+   */
+  alpha = true,
+  applyCanvasStyle = true,
+  styles = {},
   // antialias affects performance but gives a better rendering
   antialias = false,
   // powerPreference options: 'high-performance' | 'low-power' | 'default'
@@ -214,6 +236,8 @@ export function minimalSetup({
   const { renderer, scene, canvas, fullScreenHandler } = getRendererSceneCanvas(canvasId, {
     alpha,
     antialias,
+    applyCanvasStyle,
+    styles,
     powerPreference,
     allowFullScreen,
   });
@@ -222,13 +246,10 @@ export function minimalSetup({
   // if orbit control is enabled, apply orbit control and animation callback.
   // if not, check if we have an animationCallback to apply it alone
   if (enableOrbitControl) {
-    ({ controls, animationId } = applyOrbitControl(
-      camera,
-      canvas,
-      renderer,
-      scene,
-      animationCallback
-    ));
+    ({ controls, animationId } = applyOrbitControl(camera, canvas, renderer, scene, {
+      animationCallback,
+      handleOnlyCanvasEvents: orbitControlHandleOnlyCanvasEvents,
+    }));
   } else if (animationCallback) {
     animationId = loopAnimation(renderer, scene, camera, animationCallback);
   }
