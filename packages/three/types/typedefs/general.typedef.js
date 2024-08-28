@@ -51,6 +51,8 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * @property {boolean} orbitControlHandleOnlyCanvasEvents
  * @property {Function} animationCallback
  * @property {Function} resizeCallback
+ * @property {number} height
+ * @property {number} width
  * @property {boolean} alpha
  * @property {boolean} applyCanvasStyle
  * @property {Object} styles

@@ -3,15 +3,15 @@ import {
   getRendererSceneCanvas,
   setFullScreenListener,
   setupDefaultCameraAndScene,
+  getDefaultCamera,
   setResizeListener,
   updateRendererSizeRatio,
   // general - ANIMATION
   applyOrbitControl,
   loopAnimation,
   minimalSetup,
-
-  // general - TYPE CHECKERS
-  isMesh,
+  // general
+  isWebglSupported,
 } from './general.js';
 
 import {
@@ -28,11 +28,14 @@ import {
 
 import { glsl, replaceShaderImport } from './shaders.js';
 
+import { isDirectionalLight, isMesh } from './type-guards.js';
+
 export default {
   // general - ESSENTIALS
   getRendererSceneCanvas,
   setFullScreenListener,
   setupDefaultCameraAndScene,
+  getDefaultCamera,
   setResizeListener,
   updateRendererSizeRatio,
 
@@ -41,8 +44,8 @@ export default {
   loopAnimation,
   minimalSetup,
 
-  // general - TYPE CHECKERS
-  isMesh,
+  // general
+  isWebglSupported,
 
   // cameras - CAMERAS
   loadCameraCoordinates,
@@ -57,9 +60,14 @@ export default {
   // shaders
   glsl,
   replaceShaderImport,
+
+  // type guards
+  isMesh,
+  isDirectionalLight,
 };
 
 // re-export named exports
 export * from './cameras.js';
 export * from './general.js';
 export * from './shaders.js';
+export * from './type-guards.js';

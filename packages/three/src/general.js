@@ -93,7 +93,7 @@ export function setupDefaultCameraAndScene(
     resizeCallback = () => {},
   } = {}
 ) {
-  const _camera = camera || new PerspectiveCamera(75, width / height, near, far);
+  const _camera = camera || getDefaultCamera({ width, height, near, far });
   _camera.position.z = 3;
   if (mesh) {
     _camera.lookAt(mesh.position);
@@ -107,6 +107,21 @@ export function setupDefaultCameraAndScene(
   return { camera: _camera, resizeHandler };
 }
 
+/**
+ * get default camera
+ * @param {{width: number, height: number, near: number, far: number}} options
+ * @returns {PerspectiveCamera} camera
+ */
+export function getDefaultCamera({
+  width = window.innerWidth,
+  height = window.innerHeight,
+  near = 0.1,
+  far = 2000,
+} = {}) {
+  const c = new PerspectiveCamera(75, width / height, near, far);
+  c.position.z = 3;
+  return c;
+}
 /**
  *
  * @param {Camera} camera
@@ -139,7 +154,7 @@ export function setResizeListener(
 
 /**
  *
- * @param {Renderer} renderer
+ * @param {WebGLRenderer} renderer
  * @param {number} width
  * @param {number} height
  */
@@ -162,7 +177,7 @@ export function updateRendererSizeRatio(renderer, width, height) {
  * @param {WebGLRenderer} renderer
  * @param {Scene} scene
  * @param {animationCallback: Function, handleOnlyCanvasEvents: boolean} options
- * @returns {{controls: OrbitControls, animationid: number}}
+ * @returns {{controls: OrbitControls, animationId: number}}
  */
 export function applyOrbitControl(
   camera,
@@ -197,7 +212,7 @@ export function loopAnimation(renderer, scene, camera, callback = () => {}) {
   const animate = () => {
     callback({ renderer, scene, camera });
     renderer.render(scene, camera);
-    return window.requestAnimationFrame(animate);
+    return requestAnimationFrame(animate);
   };
   return animate();
 }
@@ -223,6 +238,8 @@ export function minimalSetup({
   /**
    * getRendererSceneCanvas options
    */
+  height = window.innerHeight,
+  width = window.innerWidth,
   alpha = true,
   applyCanvasStyle = true,
   styles = {},
@@ -234,6 +251,8 @@ export function minimalSetup({
   let controls;
   let animationId;
   const { renderer, scene, canvas, fullScreenHandler } = getRendererSceneCanvas(canvasId, {
+    height,
+    width,
     alpha,
     antialias,
     applyCanvasStyle,
@@ -241,7 +260,11 @@ export function minimalSetup({
     powerPreference,
     allowFullScreen,
   });
-  const { camera, resizeHandler } = setupDefaultCameraAndScene(scene, renderer, { resizeCallback });
+  const { camera, resizeHandler } = setupDefaultCameraAndScene(scene, renderer, {
+    resizeCallback,
+    height,
+    width,
+  });
 
   // if orbit control is enabled, apply orbit control and animation callback.
   // if not, check if we have an animationCallback to apply it alone
@@ -275,10 +298,18 @@ export function minimalSetup({
 }
 
 /**
- * Type guard to check if an object is of type THREE.Mesh
- * @param {THREE.Object3D} object
+ * Check if three js is supported
+ * https://stackoverflow.com/questions/11871077/proper-way-to-detect-webgl-support
  * @returns {boolean}
  */
-export function isMesh(object) {
-  return object?.type === 'Mesh';
+export function isWebglSupported() {
+  try {
+    var canvas = document.createElement('canvas');
+    return (
+      !!window.WebGLRenderingContext &&
+      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    );
+  } catch (e) {
+    return false;
+  }
 }

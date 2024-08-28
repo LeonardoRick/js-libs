@@ -1,4 +1,4 @@
-import type { Scene, Camera, WebGLRenderer, Mesh, WebGLRenderer } from 'three';
+import type { Scene, Camera, WebGLRenderer, Mesh, PerspectiveCamera } from 'three';
 import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -51,6 +51,8 @@ export interface IminimalSetupOptions {
   orbitControlHandleOnlyCanvasEvents?: boolean;
   animationCallback?: (options: IAnimationCallbackOptions) => void;
   resizeCallback?: (options: IresizeCallbackOptions) => void;
+  height?: number;
+  width?: number;
   alpha?: boolean;
   applyCanvasStyle?: boolean;
   styles?: Object;
@@ -71,7 +73,7 @@ export interface IminimalSetupReturnType {
   fullScreenHandler: () => void;
   resizeHandler: () => void;
   controls?: OrbitControls;
-  animationid?: number;
+  animationId?: number;
 }
 
 /******************************************
@@ -89,6 +91,13 @@ export function setupDefaultCameraAndScene(
   renderer: WebGLRenderer,
   options?: IsetupDefaultCameraAndSceneOptions
 ): { camera: Camera; resizeHandler: () => void };
+
+export function getDefaultCamera(options?: {
+  width?: number;
+  height?: number;
+  near?: number;
+  far?: number;
+}): PerspectiveCamera;
 
 export function setResizeListener(
   camera: Camera,
@@ -123,4 +132,7 @@ export function loopAnimation(
 
 export function minimalSetup(options?: IminimalSetupOptions): IminimalSetupReturnType;
 
-export function isMesh(object?: Object3D): object is Mesh;
+/******************************************
+ * GENERAL
+ ******************************************/
+export function isWebglSupported(): boolean;
