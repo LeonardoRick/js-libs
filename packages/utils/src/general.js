@@ -53,3 +53,12 @@ export function isDefinedAndNotEmpty(value) {
 export function isPlainObject(obj) {
   return !!obj && typeof obj === 'object' && Object.getPrototypeOf(obj) === Object.prototype;
 }
+
+/**
+ * Check if a stirng is true or false
+ * @param {string\boolean|undefined|null} value
+ * @return {boolean}
+ */
+export function isStringTrue(value) {
+  return String(value).toLocaleLowerCase() === 'true';
+}

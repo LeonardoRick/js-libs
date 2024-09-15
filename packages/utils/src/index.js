@@ -1,4 +1,10 @@
-import { createDefault, isPlainObject, isDefined, isDefinedAndNotEmpty } from './general.js';
+import {
+  createDefault,
+  isPlainObject,
+  isDefined,
+  isDefinedAndNotEmpty,
+  isStringTrue,
+} from './general.js';
 import { keyboardUndoListener } from './keyboard.js';
 import { any } from './lists.js';
 import { hypotenuse, normalize } from './math.js';
@@ -11,6 +17,7 @@ export default {
   isPlainObject,
   isDefined,
   isDefinedAndNotEmpty,
+  isStringTrue,
   // keyboard
   keyboardUndoListener,
   // lists

@@ -1,4 +1,10 @@
-import { createDefault, isDefined, isDefinedAndNotEmpty, isPlainObject } from '../src/general';
+import {
+  createDefault,
+  isDefined,
+  isDefinedAndNotEmpty,
+  isPlainObject,
+  isStringTrue,
+} from '../src/general';
 
 describe('createDefault ::', () => {
   it('should behave properly as an object and allow asignments on undefined properties', () => {
@@ -113,5 +119,30 @@ describe('isPlainObject ::', () => {
     expect(isPlainObject(false)).toEqual(false);
     expect(isPlainObject(null)).toEqual(false);
     expect(isPlainObject(undefined)).toEqual(false);
+  });
+});
+
+describe('isStringTrue ::', () => {
+  it('should return true if the string is true', () => {
+    expect(isStringTrue('true')).toEqual(true);
+  });
+
+  it('should return false if the string is false', () => {
+    expect(isStringTrue('false')).toEqual(false);
+  });
+
+  it('should return the right values for boolean input', () => {
+    expect(isStringTrue(true)).toEqual(true);
+    expect(isStringTrue(false)).toEqual(false);
+  });
+
+  it('should return false to falsy values', () => {
+    expect(isStringTrue('')).toEqual(false);
+    expect(isStringTrue(undefined)).toEqual(false);
+    expect(isStringTrue(null)).toEqual(false);
+  });
+
+  it('should not return true for any string sent', () => {
+    expect(isStringTrue('bla bla')).toEqual(false);
   });
 });
