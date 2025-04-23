@@ -43,6 +43,32 @@ export function normalize(value, normalizer, { min = 0, max = 1, inverted = fals
 }
 
 /**
+ * Convert a “normalized” value back to its real distance.
+ * Created with chatGPT based on the normalize function.
+ *
+ * @param {number} normVal   The value returned by `normalize`
+ * @param {number} normalizer  The same normalizer you passed to `normalize`
+ * @param {{ min?: number; max?: number; inverted?: boolean }} options
+ *        Must be identical to the options used when normalising.
+ * @returns {number} the original (or equivalent) raw value
+ */
+export function denormalize(normVal, normalizer, { min = 0, max = 1, inverted = false } = {}) {
+  // replicate helper variables exactly as in `normalize`
+  const _min = inverted ? max : min;
+  const _max = inverted ? min : max;
+
+  // Undo interpolation:  normVal = _min + n * (_max - _min)
+  // => n = (normVal - _min) / (_max - _min)
+  const n = (normVal - _min) / (_max - _min);
+
+  // Clamp n back into [0,1] just in case
+  const clampedN = Math.min(Math.max(n, 0), 1);
+
+  // Recover the original value (distance)
+  return clampedN * normalizer;
+}
+
+/**
  * Round a number
  * @param {number} n
  * @param {number} decimals

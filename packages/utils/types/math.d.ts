@@ -5,3 +5,9 @@ export function normalize(
   maxValue: number,
   options?: { inverted?: boolean; min?: number; max?: number }
 ): number;
+
+export function denormalize(
+  value: number,
+  maxValue: number,
+  options?: { inverted?: boolean; min?: number; max?: number }
+): number;

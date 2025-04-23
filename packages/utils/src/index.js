@@ -7,7 +7,7 @@ import {
 } from './general.js';
 import { keyboardUndoListener } from './keyboard.js';
 import { any } from './lists.js';
-import { hypotenuse, normalize } from './math.js';
+import { denormalize, hypotenuse, normalize } from './math.js';
 import { runOnWorker, InlineWorker } from './run-on-worker.js';
 import { moveTagToCursorPosition, getCursorCenterDistance } from './ui.js';
 
@@ -25,6 +25,7 @@ export default {
   // math
   hypotenuse,
   normalize,
+  denormalize,
   // run on worker
   runOnWorker,
   InlineWorker,
