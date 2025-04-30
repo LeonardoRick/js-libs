@@ -18,6 +18,7 @@ Javascript functions that are useful to be re-used
 
     pnpm version patch
     pnpm run build
+    git add .
     git commit -m "<message>"
     git push
     npm publish --access=public
