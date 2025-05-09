@@ -15,19 +15,25 @@ export function hypotenuse(cat1, cat2, { decimals = 2 } = {}) {
  * first normalize it between 0 and 1 (const normalized)
  * @param {{min: number, max: number, inverted: boolean }} options
  *
- * min: minimum value on range that we want to clamp the real value. If
- * if the real value can reach 0 and or minRange is 100, when real value is 0 our minRange will
- * be 100
  *
- * max: maximum value on range that we want to clamp the real value. If
- * if the real value can reach 100 and maxRange is 1000, when real value is 100 our maxRange
- * will be 1000
+ * min: The **lowest possible output value** after normalization. It represents the start of the desired output range.
+ * For example, if you want the result to be scaled between 50 and 100, set `min = 50`.
+ *
+ * max: The **highest possible output value** after normalization. It represents the end of the desired output range.
+ * Continuing the example above, set `max = 100` to cap the output range.
+ *
+ * Note: These values do not restrict the input range (which is controlled by `value` and `normalizer`), but define
+ * how the output is mapped and scaled. The normalized output will always fall between `min` and `max`.
  *
  * inverted: is true we invert the logic. Usually our value and normalizer are distances. And in
  * case of distances, as variable value is smaller (which means our distance is lower to our
  * point of reference) we want to emphasize somehting, so when inverted is true, as 'value'
- * tends to 0,the returned value is closer to maxRange
+ * tends to 0,the returned value is closer to `max`
  * @returns {number} normalized value
+ *
+ *  Example:
+ * normalize(30, 100, { min: 0, max: 1 }) => 0.3
+ * normalize(30, 100, { min: 0, max: 1, inverted: true }) => 0.7
  */
 export function normalize(value, normalizer, { min = 0, max = 1, inverted = false } = {}) {
   // Calculate the normalized value as a proportion of max

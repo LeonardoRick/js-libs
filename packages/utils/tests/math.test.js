@@ -27,6 +27,10 @@ describe('normalize', () => {
     expect(normalize(-10, 10, { min: 100, max: 1000 })).toEqual(100);
     expect(normalize(2000, 10, { min: 100, max: 1000 })).toEqual(1000);
   });
+
+  it('should normalize with inverted defined', () => {
+    expect(normalize(30, 100, { min: 0, max: 1, inverted: true })).toEqual(0.7);
+  });
 });
 
 describe('denormalize', () => {
