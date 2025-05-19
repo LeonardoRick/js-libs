@@ -11,7 +11,7 @@ export function hypotenuse(cat1, cat2, { decimals = 2 } = {}) {
 /**
  * normalize a value based on another.
  * @param {number} value that we want to normalized based on another
- * @param {number} normalizer that our current value can reach. This is important so we can
+ * @param {number} normalizer max value that the REAL value can reach. This is important so we can
  * first normalize it between 0 and 1 (const normalized)
  * @param {{min: number, max: number, inverted: boolean }} options
  *
